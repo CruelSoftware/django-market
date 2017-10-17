@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        {% for object in objects %}
+        {% if object %}
+            <div class="panel panel-default custom__panel">
+                <div class="panel-body">
+                    <a href="/object/{{ object.id }}">
+                    <img class="category__image col-md-4" src="{{media}}{{ object.image }}"></a>
+                        <div class="col-md-4">
+                            <div class="top__title"><a href="object/{{ object.id }}">{{ object.title }}</a></div>
+                            <div class="middle__params_block">
+                                {% for param in object.params %}
+                                    <div class="middle__params">{{ param.object }} : {{ param.value }}</div>
+                                {% endfor %}
+                                {% if object.colors %}
+
+                                    <div class="middle__params">Цвет:
+                                        {% for color in object.colors %}
+                                            <div class="circle" style="background: {{ color }}"></div>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+
+
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="top__title bold__price">{{ object.price }} ₽</div>
+                        </div>
+
+                </div>
+            </div>
+        {%endif%}
+        {% endfor %}
+    </div>
+{% endblock %}

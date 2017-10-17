@@ -1,0 +1,39 @@
+{% load static %}
+
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Market{% endblock %}</title>
+    {% block styles %}
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" type=text/css href="{% static 'css/base.css' %}">
+    {% endblock %}
+</head>
+
+<body>
+
+{% block navbar %}
+<div id="fb-root"></div>
+    <div class='container'>
+
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav navbar-left">
+                    <li><a class='navbar-brand' href="/">Yandex.Market</a></li>
+                </ul>
+                {% for category in categories %}
+                    <li><a class='navbar-link normal__font_size' href="/category/{{ category.id }}">{{ category.title }}</a></li>
+                {% endfor %}
+            </ul>
+          </div>
+        </nav>
+    </div>
+{% endblock %}
+
+{% block content %}
+{% endblock %}
+
+</body>
+</html>

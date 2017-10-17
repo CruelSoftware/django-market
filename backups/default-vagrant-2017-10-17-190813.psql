@@ -1,0 +1,1855 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.5.7
+-- Dumped by pg_dump version 9.5.7
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET search_path = public, pg_catalog;
+
+ALTER TABLE ONLY public.market_objectparam DROP CONSTRAINT market_objectparam_param_id_557593e2_fk_market_param_id;
+ALTER TABLE ONLY public.market_objectparam DROP CONSTRAINT market_objectparam_object_id_6c0d01cc_fk_market_object_id;
+ALTER TABLE ONLY public.market_object_colors DROP CONSTRAINT market_object_colors_object_id_698debc5_fk_market_object_id;
+ALTER TABLE ONLY public.market_object_colors DROP CONSTRAINT market_object_colors_colors_id_23e450ba_fk_market_colors_id;
+ALTER TABLE ONLY public.market_object DROP CONSTRAINT market_object_category_id_0bd3130c_fk_market_category_id;
+ALTER TABLE ONLY public.market_image DROP CONSTRAINT market_image_object_id_48df3a49_fk_market_object_id;
+ALTER TABLE ONLY public.django_admin_log DROP CONSTRAINT django_admin_log_user_id_c564eba6_fk_auth_user_id;
+ALTER TABLE ONLY public.django_admin_log DROP CONSTRAINT django_admin_content_type_id_c4bce8eb_fk_django_content_type_id;
+ALTER TABLE ONLY public.auth_user_user_permissions DROP CONSTRAINT auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id;
+ALTER TABLE ONLY public.auth_user_user_permissions DROP CONSTRAINT auth_user_user_per_permission_id_1fbb5f2c_fk_auth_permission_id;
+ALTER TABLE ONLY public.auth_user_groups DROP CONSTRAINT auth_user_groups_user_id_6a12ed8b_fk_auth_user_id;
+ALTER TABLE ONLY public.auth_user_groups DROP CONSTRAINT auth_user_groups_group_id_97559544_fk_auth_group_id;
+ALTER TABLE ONLY public.auth_permission DROP CONSTRAINT auth_permiss_content_type_id_2f476e4b_fk_django_content_type_id;
+ALTER TABLE ONLY public.auth_group_permissions DROP CONSTRAINT auth_group_permissions_group_id_b120cbf9_fk_auth_group_id;
+ALTER TABLE ONLY public.auth_group_permissions DROP CONSTRAINT auth_group_permiss_permission_id_84c5c92e_fk_auth_permission_id;
+DROP INDEX public.market_param_title_4e283ab9_like;
+DROP INDEX public.market_objectparam_af31437c;
+DROP INDEX public.market_objectparam_6d7ed919;
+DROP INDEX public.market_object_title_e0ef8546_like;
+DROP INDEX public.market_object_colors_af31437c;
+DROP INDEX public.market_object_colors_82426f06;
+DROP INDEX public.market_object_b583a629;
+DROP INDEX public.market_image_af31437c;
+DROP INDEX public.market_colors_title_1901bb03_like;
+DROP INDEX public.market_colors_html_code_2850dabd_like;
+DROP INDEX public.market_category_title_ef39b2b5_like;
+DROP INDEX public.django_session_session_key_c0390e0f_like;
+DROP INDEX public.django_session_de54fa62;
+DROP INDEX public.django_admin_log_e8701ad4;
+DROP INDEX public.django_admin_log_417f1b1c;
+DROP INDEX public.auth_user_username_6821ab7c_like;
+DROP INDEX public.auth_user_user_permissions_e8701ad4;
+DROP INDEX public.auth_user_user_permissions_8373b171;
+DROP INDEX public.auth_user_groups_e8701ad4;
+DROP INDEX public.auth_user_groups_0e939a4f;
+DROP INDEX public.auth_permission_417f1b1c;
+DROP INDEX public.auth_group_permissions_8373b171;
+DROP INDEX public.auth_group_permissions_0e939a4f;
+DROP INDEX public.auth_group_name_a6ea08ec_like;
+ALTER TABLE ONLY public.market_param DROP CONSTRAINT market_param_title_key;
+ALTER TABLE ONLY public.market_param DROP CONSTRAINT market_param_pkey;
+ALTER TABLE ONLY public.market_objectparam DROP CONSTRAINT market_objectparam_pkey;
+ALTER TABLE ONLY public.market_object DROP CONSTRAINT market_object_title_key;
+ALTER TABLE ONLY public.market_object DROP CONSTRAINT market_object_pkey;
+ALTER TABLE ONLY public.market_object_colors DROP CONSTRAINT market_object_colors_pkey;
+ALTER TABLE ONLY public.market_object_colors DROP CONSTRAINT market_object_colors_object_id_371e0d5d_uniq;
+ALTER TABLE ONLY public.market_image DROP CONSTRAINT market_image_pkey;
+ALTER TABLE ONLY public.market_colors DROP CONSTRAINT market_colors_title_key;
+ALTER TABLE ONLY public.market_colors DROP CONSTRAINT market_colors_pkey;
+ALTER TABLE ONLY public.market_colors DROP CONSTRAINT market_colors_html_code_key;
+ALTER TABLE ONLY public.market_category DROP CONSTRAINT market_category_title_key;
+ALTER TABLE ONLY public.market_category DROP CONSTRAINT market_category_pkey;
+ALTER TABLE ONLY public.django_session DROP CONSTRAINT django_session_pkey;
+ALTER TABLE ONLY public.django_migrations DROP CONSTRAINT django_migrations_pkey;
+ALTER TABLE ONLY public.django_content_type DROP CONSTRAINT django_content_type_pkey;
+ALTER TABLE ONLY public.django_content_type DROP CONSTRAINT django_content_type_app_label_76bd3d3b_uniq;
+ALTER TABLE ONLY public.django_admin_log DROP CONSTRAINT django_admin_log_pkey;
+ALTER TABLE ONLY public.auth_user DROP CONSTRAINT auth_user_username_key;
+ALTER TABLE ONLY public.auth_user_user_permissions DROP CONSTRAINT auth_user_user_permissions_user_id_14a6b632_uniq;
+ALTER TABLE ONLY public.auth_user_user_permissions DROP CONSTRAINT auth_user_user_permissions_pkey;
+ALTER TABLE ONLY public.auth_user DROP CONSTRAINT auth_user_pkey;
+ALTER TABLE ONLY public.auth_user_groups DROP CONSTRAINT auth_user_groups_user_id_94350c0c_uniq;
+ALTER TABLE ONLY public.auth_user_groups DROP CONSTRAINT auth_user_groups_pkey;
+ALTER TABLE ONLY public.auth_permission DROP CONSTRAINT auth_permission_pkey;
+ALTER TABLE ONLY public.auth_permission DROP CONSTRAINT auth_permission_content_type_id_01ab375a_uniq;
+ALTER TABLE ONLY public.auth_group DROP CONSTRAINT auth_group_pkey;
+ALTER TABLE ONLY public.auth_group_permissions DROP CONSTRAINT auth_group_permissions_pkey;
+ALTER TABLE ONLY public.auth_group_permissions DROP CONSTRAINT auth_group_permissions_group_id_0cd325b0_uniq;
+ALTER TABLE ONLY public.auth_group DROP CONSTRAINT auth_group_name_key;
+ALTER TABLE public.market_param ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.market_objectparam ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.market_object_colors ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.market_object ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.market_image ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.market_colors ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.market_category ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.django_migrations ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.django_content_type ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.django_admin_log ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.auth_user_user_permissions ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.auth_user_groups ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.auth_user ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.auth_permission ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.auth_group_permissions ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.auth_group ALTER COLUMN id DROP DEFAULT;
+DROP SEQUENCE public.market_param_id_seq;
+DROP TABLE public.market_param;
+DROP SEQUENCE public.market_objectparam_id_seq;
+DROP TABLE public.market_objectparam;
+DROP SEQUENCE public.market_object_id_seq;
+DROP SEQUENCE public.market_object_colors_id_seq;
+DROP TABLE public.market_object_colors;
+DROP TABLE public.market_object;
+DROP SEQUENCE public.market_image_id_seq;
+DROP TABLE public.market_image;
+DROP SEQUENCE public.market_colors_id_seq;
+DROP TABLE public.market_colors;
+DROP SEQUENCE public.market_category_id_seq;
+DROP TABLE public.market_category;
+DROP TABLE public.django_session;
+DROP SEQUENCE public.django_migrations_id_seq;
+DROP TABLE public.django_migrations;
+DROP SEQUENCE public.django_content_type_id_seq;
+DROP TABLE public.django_content_type;
+DROP SEQUENCE public.django_admin_log_id_seq;
+DROP TABLE public.django_admin_log;
+DROP SEQUENCE public.auth_user_user_permissions_id_seq;
+DROP TABLE public.auth_user_user_permissions;
+DROP SEQUENCE public.auth_user_id_seq;
+DROP SEQUENCE public.auth_user_groups_id_seq;
+DROP TABLE public.auth_user_groups;
+DROP TABLE public.auth_user;
+DROP SEQUENCE public.auth_permission_id_seq;
+DROP TABLE public.auth_permission;
+DROP SEQUENCE public.auth_group_permissions_id_seq;
+DROP TABLE public.auth_group_permissions;
+DROP SEQUENCE public.auth_group_id_seq;
+DROP TABLE public.auth_group;
+DROP EXTENSION plpgsql;
+DROP SCHEMA public;
+--
+-- Name: public; Type: SCHEMA; Schema: -; Owner: postgres
+--
+
+CREATE SCHEMA public;
+
+
+ALTER SCHEMA public OWNER TO postgres;
+
+--
+-- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: postgres
+--
+
+COMMENT ON SCHEMA public IS 'standard public schema';
+
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: auth_group; Type: TABLE; Schema: public; Owner: django_market
+--
+
+CREATE TABLE auth_group (
+    id integer NOT NULL,
+    name character varying(80) NOT NULL
+);
+
+
+ALTER TABLE auth_group OWNER TO django_market;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE; Schema: public; Owner: django_market
+--
+
+CREATE SEQUENCE auth_group_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE auth_group_id_seq OWNER TO django_market;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: django_market
+--
+
+ALTER SEQUENCE auth_group_id_seq OWNED BY auth_group.id;
+
+
+--
+-- Name: auth_group_permissions; Type: TABLE; Schema: public; Owner: django_market
+--
+
+CREATE TABLE auth_group_permissions (
+    id integer NOT NULL,
+    group_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE auth_group_permissions OWNER TO django_market;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: django_market
+--
+
+CREATE SEQUENCE auth_group_permissions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE auth_group_permissions_id_seq OWNER TO django_market;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: django_market
+--
+
+ALTER SEQUENCE auth_group_permissions_id_seq OWNED BY auth_group_permissions.id;
+
+
+--
+-- Name: auth_permission; Type: TABLE; Schema: public; Owner: django_market
+--
+
+CREATE TABLE auth_permission (
+    id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    content_type_id integer NOT NULL,
+    codename character varying(100) NOT NULL
+);
+
+
+ALTER TABLE auth_permission OWNER TO django_market;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE; Schema: public; Owner: django_market
+--
+
+CREATE SEQUENCE auth_permission_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE auth_permission_id_seq OWNER TO django_market;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: django_market
+--
+
+ALTER SEQUENCE auth_permission_id_seq OWNED BY auth_permission.id;
+
+
+--
+-- Name: auth_user; Type: TABLE; Schema: public; Owner: django_market
+--
+
+CREATE TABLE auth_user (
+    id integer NOT NULL,
+    password character varying(128) NOT NULL,
+    last_login timestamp with time zone,
+    is_superuser boolean NOT NULL,
+    username character varying(150) NOT NULL,
+    first_name character varying(30) NOT NULL,
+    last_name character varying(30) NOT NULL,
+    email character varying(254) NOT NULL,
+    is_staff boolean NOT NULL,
+    is_active boolean NOT NULL,
+    date_joined timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE auth_user OWNER TO django_market;
+
+--
+-- Name: auth_user_groups; Type: TABLE; Schema: public; Owner: django_market
+--
+
+CREATE TABLE auth_user_groups (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    group_id integer NOT NULL
+);
+
+
+ALTER TABLE auth_user_groups OWNER TO django_market;
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: django_market
+--
+
+CREATE SEQUENCE auth_user_groups_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE auth_user_groups_id_seq OWNER TO django_market;
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: django_market
+--
+
+ALTER SEQUENCE auth_user_groups_id_seq OWNED BY auth_user_groups.id;
+
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE; Schema: public; Owner: django_market
+--
+
+CREATE SEQUENCE auth_user_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE auth_user_id_seq OWNER TO django_market;
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: django_market
+--
+
+ALTER SEQUENCE auth_user_id_seq OWNED BY auth_user.id;
+
+
+--
+-- Name: auth_user_user_permissions; Type: TABLE; Schema: public; Owner: django_market
+--
+
+CREATE TABLE auth_user_user_permissions (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE auth_user_user_permissions OWNER TO django_market;
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: django_market
+--
+
+CREATE SEQUENCE auth_user_user_permissions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE auth_user_user_permissions_id_seq OWNER TO django_market;
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: django_market
+--
+
+ALTER SEQUENCE auth_user_user_permissions_id_seq OWNED BY auth_user_user_permissions.id;
+
+
+--
+-- Name: django_admin_log; Type: TABLE; Schema: public; Owner: django_market
+--
+
+CREATE TABLE django_admin_log (
+    id integer NOT NULL,
+    action_time timestamp with time zone NOT NULL,
+    object_id text,
+    object_repr character varying(200) NOT NULL,
+    action_flag smallint NOT NULL,
+    change_message text NOT NULL,
+    content_type_id integer,
+    user_id integer NOT NULL,
+    CONSTRAINT django_admin_log_action_flag_check CHECK ((action_flag >= 0))
+);
+
+
+ALTER TABLE django_admin_log OWNER TO django_market;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE; Schema: public; Owner: django_market
+--
+
+CREATE SEQUENCE django_admin_log_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE django_admin_log_id_seq OWNER TO django_market;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: django_market
+--
+
+ALTER SEQUENCE django_admin_log_id_seq OWNED BY django_admin_log.id;
+
+
+--
+-- Name: django_content_type; Type: TABLE; Schema: public; Owner: django_market
+--
+
+CREATE TABLE django_content_type (
+    id integer NOT NULL,
+    app_label character varying(100) NOT NULL,
+    model character varying(100) NOT NULL
+);
+
+
+ALTER TABLE django_content_type OWNER TO django_market;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE; Schema: public; Owner: django_market
+--
+
+CREATE SEQUENCE django_content_type_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE django_content_type_id_seq OWNER TO django_market;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: django_market
+--
+
+ALTER SEQUENCE django_content_type_id_seq OWNED BY django_content_type.id;
+
+
+--
+-- Name: django_migrations; Type: TABLE; Schema: public; Owner: django_market
+--
+
+CREATE TABLE django_migrations (
+    id integer NOT NULL,
+    app character varying(255) NOT NULL,
+    name character varying(255) NOT NULL,
+    applied timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE django_migrations OWNER TO django_market;
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE; Schema: public; Owner: django_market
+--
+
+CREATE SEQUENCE django_migrations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE django_migrations_id_seq OWNER TO django_market;
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: django_market
+--
+
+ALTER SEQUENCE django_migrations_id_seq OWNED BY django_migrations.id;
+
+
+--
+-- Name: django_session; Type: TABLE; Schema: public; Owner: django_market
+--
+
+CREATE TABLE django_session (
+    session_key character varying(40) NOT NULL,
+    session_data text NOT NULL,
+    expire_date timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE django_session OWNER TO django_market;
+
+--
+-- Name: market_category; Type: TABLE; Schema: public; Owner: django_market
+--
+
+CREATE TABLE market_category (
+    id integer NOT NULL,
+    title character varying(40) NOT NULL
+);
+
+
+ALTER TABLE market_category OWNER TO django_market;
+
+--
+-- Name: market_category_id_seq; Type: SEQUENCE; Schema: public; Owner: django_market
+--
+
+CREATE SEQUENCE market_category_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE market_category_id_seq OWNER TO django_market;
+
+--
+-- Name: market_category_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: django_market
+--
+
+ALTER SEQUENCE market_category_id_seq OWNED BY market_category.id;
+
+
+--
+-- Name: market_colors; Type: TABLE; Schema: public; Owner: django_market
+--
+
+CREATE TABLE market_colors (
+    id integer NOT NULL,
+    title character varying(40) NOT NULL,
+    html_code character varying(10) NOT NULL
+);
+
+
+ALTER TABLE market_colors OWNER TO django_market;
+
+--
+-- Name: market_colors_id_seq; Type: SEQUENCE; Schema: public; Owner: django_market
+--
+
+CREATE SEQUENCE market_colors_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE market_colors_id_seq OWNER TO django_market;
+
+--
+-- Name: market_colors_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: django_market
+--
+
+ALTER SEQUENCE market_colors_id_seq OWNED BY market_colors.id;
+
+
+--
+-- Name: market_image; Type: TABLE; Schema: public; Owner: django_market
+--
+
+CREATE TABLE market_image (
+    id integer NOT NULL,
+    image character varying(100),
+    height integer NOT NULL,
+    width integer NOT NULL,
+    alt character varying(64) NOT NULL,
+    object_id integer NOT NULL
+);
+
+
+ALTER TABLE market_image OWNER TO django_market;
+
+--
+-- Name: market_image_id_seq; Type: SEQUENCE; Schema: public; Owner: django_market
+--
+
+CREATE SEQUENCE market_image_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE market_image_id_seq OWNER TO django_market;
+
+--
+-- Name: market_image_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: django_market
+--
+
+ALTER SEQUENCE market_image_id_seq OWNED BY market_image.id;
+
+
+--
+-- Name: market_object; Type: TABLE; Schema: public; Owner: django_market
+--
+
+CREATE TABLE market_object (
+    id integer NOT NULL,
+    title character varying(200) NOT NULL,
+    price integer NOT NULL,
+    category_id integer NOT NULL
+);
+
+
+ALTER TABLE market_object OWNER TO django_market;
+
+--
+-- Name: market_object_colors; Type: TABLE; Schema: public; Owner: django_market
+--
+
+CREATE TABLE market_object_colors (
+    id integer NOT NULL,
+    object_id integer NOT NULL,
+    colors_id integer NOT NULL
+);
+
+
+ALTER TABLE market_object_colors OWNER TO django_market;
+
+--
+-- Name: market_object_colors_id_seq; Type: SEQUENCE; Schema: public; Owner: django_market
+--
+
+CREATE SEQUENCE market_object_colors_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE market_object_colors_id_seq OWNER TO django_market;
+
+--
+-- Name: market_object_colors_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: django_market
+--
+
+ALTER SEQUENCE market_object_colors_id_seq OWNED BY market_object_colors.id;
+
+
+--
+-- Name: market_object_id_seq; Type: SEQUENCE; Schema: public; Owner: django_market
+--
+
+CREATE SEQUENCE market_object_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE market_object_id_seq OWNER TO django_market;
+
+--
+-- Name: market_object_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: django_market
+--
+
+ALTER SEQUENCE market_object_id_seq OWNED BY market_object.id;
+
+
+--
+-- Name: market_objectparam; Type: TABLE; Schema: public; Owner: django_market
+--
+
+CREATE TABLE market_objectparam (
+    id integer NOT NULL,
+    value character varying(200) NOT NULL,
+    object_id integer NOT NULL,
+    param_id integer NOT NULL
+);
+
+
+ALTER TABLE market_objectparam OWNER TO django_market;
+
+--
+-- Name: market_objectparam_id_seq; Type: SEQUENCE; Schema: public; Owner: django_market
+--
+
+CREATE SEQUENCE market_objectparam_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE market_objectparam_id_seq OWNER TO django_market;
+
+--
+-- Name: market_objectparam_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: django_market
+--
+
+ALTER SEQUENCE market_objectparam_id_seq OWNED BY market_objectparam.id;
+
+
+--
+-- Name: market_param; Type: TABLE; Schema: public; Owner: django_market
+--
+
+CREATE TABLE market_param (
+    id integer NOT NULL,
+    title character varying(100) NOT NULL
+);
+
+
+ALTER TABLE market_param OWNER TO django_market;
+
+--
+-- Name: market_param_id_seq; Type: SEQUENCE; Schema: public; Owner: django_market
+--
+
+CREATE SEQUENCE market_param_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE market_param_id_seq OWNER TO django_market;
+
+--
+-- Name: market_param_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: django_market
+--
+
+ALTER SEQUENCE market_param_id_seq OWNED BY market_param.id;
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY auth_group ALTER COLUMN id SET DEFAULT nextval('auth_group_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY auth_group_permissions ALTER COLUMN id SET DEFAULT nextval('auth_group_permissions_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY auth_permission ALTER COLUMN id SET DEFAULT nextval('auth_permission_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY auth_user ALTER COLUMN id SET DEFAULT nextval('auth_user_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY auth_user_groups ALTER COLUMN id SET DEFAULT nextval('auth_user_groups_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY auth_user_user_permissions ALTER COLUMN id SET DEFAULT nextval('auth_user_user_permissions_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY django_admin_log ALTER COLUMN id SET DEFAULT nextval('django_admin_log_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY django_content_type ALTER COLUMN id SET DEFAULT nextval('django_content_type_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY django_migrations ALTER COLUMN id SET DEFAULT nextval('django_migrations_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY market_category ALTER COLUMN id SET DEFAULT nextval('market_category_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY market_colors ALTER COLUMN id SET DEFAULT nextval('market_colors_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY market_image ALTER COLUMN id SET DEFAULT nextval('market_image_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY market_object ALTER COLUMN id SET DEFAULT nextval('market_object_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY market_object_colors ALTER COLUMN id SET DEFAULT nextval('market_object_colors_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY market_objectparam ALTER COLUMN id SET DEFAULT nextval('market_objectparam_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY market_param ALTER COLUMN id SET DEFAULT nextval('market_param_id_seq'::regclass);
+
+
+--
+-- Data for Name: auth_group; Type: TABLE DATA; Schema: public; Owner: django_market
+--
+
+COPY auth_group (id, name) FROM stdin;
+\.
+
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE SET; Schema: public; Owner: django_market
+--
+
+SELECT pg_catalog.setval('auth_group_id_seq', 1, false);
+
+
+--
+-- Data for Name: auth_group_permissions; Type: TABLE DATA; Schema: public; Owner: django_market
+--
+
+COPY auth_group_permissions (id, group_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: django_market
+--
+
+SELECT pg_catalog.setval('auth_group_permissions_id_seq', 1, false);
+
+
+--
+-- Data for Name: auth_permission; Type: TABLE DATA; Schema: public; Owner: django_market
+--
+
+COPY auth_permission (id, name, content_type_id, codename) FROM stdin;
+1	Can add log entry	1	add_logentry
+2	Can change log entry	1	change_logentry
+3	Can delete log entry	1	delete_logentry
+4	Can add user	2	add_user
+5	Can change user	2	change_user
+6	Can delete user	2	delete_user
+7	Can add group	3	add_group
+8	Can change group	3	change_group
+9	Can delete group	3	delete_group
+10	Can add permission	4	add_permission
+11	Can change permission	4	change_permission
+12	Can delete permission	4	delete_permission
+13	Can add content type	5	add_contenttype
+14	Can change content type	5	change_contenttype
+15	Can delete content type	5	delete_contenttype
+16	Can add session	6	add_session
+17	Can change session	6	change_session
+18	Can delete session	6	delete_session
+19	Can add param	7	add_param
+20	Can change param	7	change_param
+21	Can delete param	7	delete_param
+22	Can add object	8	add_object
+23	Can change object	8	change_object
+24	Can delete object	8	delete_object
+25	Can add category	9	add_category
+26	Can change category	9	change_category
+27	Can delete category	9	delete_category
+28	Can add colors	10	add_colors
+29	Can change colors	10	change_colors
+30	Can delete colors	10	delete_colors
+31	Can add object param	11	add_objectparam
+32	Can change object param	11	change_objectparam
+33	Can delete object param	11	delete_objectparam
+34	Can add image	12	add_image
+35	Can change image	12	change_image
+36	Can delete image	12	delete_image
+\.
+
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: django_market
+--
+
+SELECT pg_catalog.setval('auth_permission_id_seq', 36, true);
+
+
+--
+-- Data for Name: auth_user; Type: TABLE DATA; Schema: public; Owner: django_market
+--
+
+COPY auth_user (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) FROM stdin;
+1	pbkdf2_sha256$30000$8z2o1NQwJ5l4$C801i5wllCyKAtsmjOFUUn8d57S3dX4m7UOOpzsUb0I=	2017-10-17 13:58:28.018003+00	t	vagrant				t	t	2017-10-17 13:58:20.535892+00
+\.
+
+
+--
+-- Data for Name: auth_user_groups; Type: TABLE DATA; Schema: public; Owner: django_market
+--
+
+COPY auth_user_groups (id, user_id, group_id) FROM stdin;
+\.
+
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: django_market
+--
+
+SELECT pg_catalog.setval('auth_user_groups_id_seq', 1, false);
+
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: django_market
+--
+
+SELECT pg_catalog.setval('auth_user_id_seq', 1, true);
+
+
+--
+-- Data for Name: auth_user_user_permissions; Type: TABLE DATA; Schema: public; Owner: django_market
+--
+
+COPY auth_user_user_permissions (id, user_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: django_market
+--
+
+SELECT pg_catalog.setval('auth_user_user_permissions_id_seq', 1, false);
+
+
+--
+-- Data for Name: django_admin_log; Type: TABLE DATA; Schema: public; Owner: django_market
+--
+
+COPY django_admin_log (id, action_time, object_id, object_repr, action_flag, change_message, content_type_id, user_id) FROM stdin;
+1	2017-10-17 13:58:42.932422+00	1	Ноутбуки	1	[{"added": {}}]	9	1
+2	2017-10-17 13:58:50.067344+00	2	Стиральные машины	1	[{"added": {}}]	9	1
+3	2017-10-17 14:01:39.45649+00	1	Черный	1	[{"added": {}}]	10	1
+4	2017-10-17 14:01:52.606173+00	2	Серый	1	[{"added": {}}]	10	1
+5	2017-10-17 14:02:04.493491+00	3	Красный	1	[{"added": {}}]	10	1
+6	2017-10-17 14:02:20.551741+00	4	Синий	1	[{"added": {}}]	10	1
+7	2017-10-17 14:02:38.895796+00	1	Процессор	1	[{"added": {}}]	7	1
+8	2017-10-17 14:02:44.768712+00	2	Частота процессора	1	[{"added": {}}]	7	1
+9	2017-10-17 14:02:50.522794+00	3	Объем жесткого диска	1	[{"added": {}}]	7	1
+10	2017-10-17 14:02:56.61263+00	4	Объем оперативной памяти	1	[{"added": {}}]	7	1
+11	2017-10-17 14:03:02.725698+00	5	Размер экрана	1	[{"added": {}}]	7	1
+12	2017-10-17 14:03:08.293952+00	6	Видеокарта	1	[{"added": {}}]	7	1
+13	2017-10-17 14:03:13.356872+00	7	Вес	1	[{"added": {}}]	7	1
+14	2017-10-17 14:03:17.966218+00	8	Оптический привод	1	[{"added": {}}]	7	1
+15	2017-10-17 14:03:24.235316+00	9	4G LTE	1	[{"added": {}}]	7	1
+16	2017-10-17 14:03:29.421267+00	10	Bluetooth	1	[{"added": {}}]	7	1
+17	2017-10-17 14:03:34.420192+00	11	Wi-Fi	1	[{"added": {}}]	7	1
+18	2017-10-17 14:03:39.095472+00	12	размер	1	[{"added": {}}]	7	1
+19	2017-10-17 14:03:44.973254+00	13	Тип	1	[{"added": {}}]	7	1
+20	2017-10-17 14:03:51.88336+00	14	Тип загрузки	1	[{"added": {}}]	7	1
+21	2017-10-17 14:03:57.05387+00	15	Загрузка	1	[{"added": {}}]	7	1
+22	2017-10-17 14:04:02.421642+00	16	класс энергопотребления	1	[{"added": {}}]	7	1
+23	2017-10-17 14:04:07.300625+00	17	Управление	1	[{"added": {}}]	7	1
+24	2017-10-17 14:04:12.314878+00	18	Отжим	1	[{"added": {}}]	7	1
+25	2017-10-17 14:04:21.787608+00	19	Защита от протечек	1	[{"added": {}}]	7	1
+26	2017-10-17 14:04:57.077699+00	1	Apple MacBook Pro 13 with Retina display Mid 2017	1	[{"added": {}}]	8	1
+27	2017-10-17 14:05:22.984296+00	2	DELL INSPIRON 5567	1	[{"added": {}}]	8	1
+28	2017-10-17 14:05:42.622036+00	3	Indesit IWUB 4085	1	[{"added": {}}]	8	1
+29	2017-10-17 14:06:07.995586+00	1	ObjectParam object	1	[{"added": {}}]	11	1
+30	2017-10-17 14:06:17.071883+00	2	ObjectParam object	1	[{"added": {}}]	11	1
+31	2017-10-17 14:06:28.386258+00	3	ObjectParam object	1	[{"added": {}}]	11	1
+32	2017-10-17 14:06:41.592745+00	4	ObjectParam object	1	[{"added": {}}]	11	1
+33	2017-10-17 14:06:51.215691+00	5	ObjectParam object	1	[{"added": {}}]	11	1
+34	2017-10-17 14:07:00.94887+00	6	ObjectParam object	1	[{"added": {}}]	11	1
+35	2017-10-17 14:07:11.113503+00	7	ObjectParam object	1	[{"added": {}}]	11	1
+36	2017-10-17 14:07:22.178512+00	8	ObjectParam object	1	[{"added": {}}]	11	1
+37	2017-10-17 14:07:34.431598+00	9	ObjectParam object	1	[{"added": {}}]	11	1
+38	2017-10-17 14:07:43.641097+00	10	ObjectParam object	1	[{"added": {}}]	11	1
+39	2017-10-17 14:08:31.251799+00	11	ObjectParam object	1	[{"added": {}}]	11	1
+40	2017-10-17 14:15:33.412349+00	12	DELL INSPIRON 5567/Core i3 / Core i5 / Core i7	1	[{"added": {}}]	11	1
+41	2017-10-17 14:15:43.805029+00	13	DELL INSPIRON 5567/2000...2700 МГц	1	[{"added": {}}]	11	1
+42	2017-10-17 14:15:53.718098+00	14	DELL INSPIRON 5567/256...1000 Гб	1	[{"added": {}}]	11	1
+43	2017-10-17 14:16:03.780954+00	15	DELL INSPIRON 5567/4...8 Гб	1	[{"added": {}}]	11	1
+44	2017-10-17 14:16:13.172671+00	16	DELL INSPIRON 5567/15.6 "	1	[{"added": {}}]	11	1
+45	2017-10-17 14:16:25.31973+00	17	DELL INSPIRON 5567/AMD Radeon R7 M440 / AMD Radeon R7 M445 / Intel HD Graphics 620	1	[{"added": {}}]	11	1
+46	2017-10-17 14:16:37.657794+00	18	DELL INSPIRON 5567/2.3 кг	1	[{"added": {}}]	11	1
+47	2017-10-17 14:16:46.853138+00	19	DELL INSPIRON 5567/DVD-RW	1	[{"added": {}}]	11	1
+48	2017-10-17 14:16:56.982346+00	20	DELL INSPIRON 5567/нет	1	[{"added": {}}]	11	1
+49	2017-10-17 14:17:14.496092+00	21	DELL INSPIRON 5567/есть	1	[{"added": {}}]	11	1
+50	2017-10-17 14:17:19.416266+00	22	DELL INSPIRON 5567/есть	1	[{"added": {}}]	11	1
+51	2017-10-17 14:17:41.529713+00	23	Indesit IWUB 4085/60x33x85 см	1	[{"added": {}}]	11	1
+52	2017-10-17 14:17:52.833054+00	24	Indesit IWUB 4085/отдельно стоящая стиральная машина	1	[{"added": {}}]	11	1
+53	2017-10-17 14:18:05.021161+00	25	Indesit IWUB 4085/фронтальная загрузка	1	[{"added": {}}]	11	1
+54	2017-10-17 14:18:14.819745+00	26	Indesit IWUB 4085/4 кг	1	[{"added": {}}]	11	1
+55	2017-10-17 14:18:25.004105+00	27	Indesit IWUB 4085/A	1	[{"added": {}}]	11	1
+56	2017-10-17 14:18:34.618705+00	28	Indesit IWUB 4085/электронное	1	[{"added": {}}]	11	1
+57	2017-10-17 14:18:44.547561+00	29	Indesit IWUB 4085/при 800 об/мин	1	[{"added": {}}]	11	1
+58	2017-10-17 14:18:57.231531+00	30	Indesit IWUB 4085/есть	1	[{"added": {}}]	11	1
+59	2017-10-17 14:20:54.444738+00	1	Image object	1	[{"added": {}}]	12	1
+60	2017-10-17 14:21:04.785295+00	2	Image object	1	[{"added": {}}]	12	1
+61	2017-10-17 14:21:14.936299+00	3	Image object	1	[{"added": {}}]	12	1
+62	2017-10-17 14:21:27.25676+00	4	Image object	1	[{"added": {}}]	12	1
+63	2017-10-17 14:21:54.714692+00	5	Image object	1	[{"added": {}}]	12	1
+64	2017-10-17 14:22:01.0434+00	6	Image object	1	[{"added": {}}]	12	1
+65	2017-10-17 14:22:11.917084+00	7	Image object	1	[{"added": {}}]	12	1
+\.
+
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: django_market
+--
+
+SELECT pg_catalog.setval('django_admin_log_id_seq', 65, true);
+
+
+--
+-- Data for Name: django_content_type; Type: TABLE DATA; Schema: public; Owner: django_market
+--
+
+COPY django_content_type (id, app_label, model) FROM stdin;
+1	admin	logentry
+2	auth	user
+3	auth	group
+4	auth	permission
+5	contenttypes	contenttype
+6	sessions	session
+7	market	param
+8	market	object
+9	market	category
+10	market	colors
+11	market	objectparam
+12	market	image
+\.
+
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: django_market
+--
+
+SELECT pg_catalog.setval('django_content_type_id_seq', 12, true);
+
+
+--
+-- Data for Name: django_migrations; Type: TABLE DATA; Schema: public; Owner: django_market
+--
+
+COPY django_migrations (id, app, name, applied) FROM stdin;
+1	contenttypes	0001_initial	2017-10-17 12:42:57.082015+00
+2	auth	0001_initial	2017-10-17 12:42:57.148053+00
+3	admin	0001_initial	2017-10-17 12:42:57.176846+00
+4	admin	0002_logentry_remove_auto_add	2017-10-17 12:42:57.189047+00
+5	contenttypes	0002_remove_content_type_name	2017-10-17 12:42:57.215043+00
+6	auth	0002_alter_permission_name_max_length	2017-10-17 12:42:57.226128+00
+7	auth	0003_alter_user_email_max_length	2017-10-17 12:42:57.237052+00
+8	auth	0004_alter_user_username_opts	2017-10-17 12:42:57.272506+00
+9	auth	0005_alter_user_last_login_null	2017-10-17 12:42:57.29115+00
+10	auth	0006_require_contenttypes_0002	2017-10-17 12:42:57.293239+00
+11	auth	0007_alter_validators_add_error_messages	2017-10-17 12:42:57.303282+00
+12	auth	0008_alter_user_username_max_length	2017-10-17 12:42:57.316732+00
+13	sessions	0001_initial	2017-10-17 12:42:57.327814+00
+14	market	0001_initial	2017-10-17 13:19:44.534451+00
+15	market	0002_auto_20171017_1408	2017-10-17 14:08:27.880141+00
+16	market	0003_image	2017-10-17 14:19:25.157315+00
+17	market	0004_auto_20171017_1420	2017-10-17 14:20:51.499291+00
+18	market	0005_auto_20171017_1438	2017-10-17 14:38:49.012108+00
+\.
+
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: django_market
+--
+
+SELECT pg_catalog.setval('django_migrations_id_seq', 18, true);
+
+
+--
+-- Data for Name: django_session; Type: TABLE DATA; Schema: public; Owner: django_market
+--
+
+COPY django_session (session_key, session_data, expire_date) FROM stdin;
+n4wm5eqip42msuxbg9kgdkyhsno7udw5	MDFkNjdjYWUwZjQxNTM1MGRlMWZiZmE0MmFjOWViMjcwZWMwNDlhYjp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiMDdmNjRjMWY1YjhlN2JjYjI3NDdmMGQ5YmY2NGVjMjdiY2U2NWNmYSIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=	2017-10-31 13:58:28.021407+00
+\.
+
+
+--
+-- Data for Name: market_category; Type: TABLE DATA; Schema: public; Owner: django_market
+--
+
+COPY market_category (id, title) FROM stdin;
+1	Ноутбуки
+2	Стиральные машины
+\.
+
+
+--
+-- Name: market_category_id_seq; Type: SEQUENCE SET; Schema: public; Owner: django_market
+--
+
+SELECT pg_catalog.setval('market_category_id_seq', 2, true);
+
+
+--
+-- Data for Name: market_colors; Type: TABLE DATA; Schema: public; Owner: django_market
+--
+
+COPY market_colors (id, title, html_code) FROM stdin;
+1	Черный	#000000
+2	Серый	#808080
+3	Красный	#FF0040
+4	Синий	#0000FF
+\.
+
+
+--
+-- Name: market_colors_id_seq; Type: SEQUENCE SET; Schema: public; Owner: django_market
+--
+
+SELECT pg_catalog.setval('market_colors_id_seq', 4, true);
+
+
+--
+-- Data for Name: market_image; Type: TABLE DATA; Schema: public; Owner: django_market
+--
+
+COPY market_image (id, image, height, width, alt, object_id) FROM stdin;
+1	images/apple-mac-book.jpg	200	200	apple mac book	1
+2	images/apple-mac-book_Rsr5BiH.jpg	500	500	apple mac book	1
+3	images/apple-mac-book_s2shGhi.jpg	500	500	apple mac book	1
+4	images/apple-mac-book_fPdWOCb.jpg	500	500	apple mac book	1
+5	images/dell-inspiron.jpg	500	500	DELL INSPIRON	2
+6	images/dell-inspiron_k2g69RH.jpg	500	500	DELL INSPIRON	2
+7	images/indesit.jpg	500	500	indesit	3
+\.
+
+
+--
+-- Name: market_image_id_seq; Type: SEQUENCE SET; Schema: public; Owner: django_market
+--
+
+SELECT pg_catalog.setval('market_image_id_seq', 7, true);
+
+
+--
+-- Data for Name: market_object; Type: TABLE DATA; Schema: public; Owner: django_market
+--
+
+COPY market_object (id, title, price, category_id) FROM stdin;
+1	Apple MacBook Pro 13 with Retina display Mid 2017	82000	1
+2	DELL INSPIRON 5567	42990	1
+3	Indesit IWUB 4085	10320	2
+\.
+
+
+--
+-- Data for Name: market_object_colors; Type: TABLE DATA; Schema: public; Owner: django_market
+--
+
+COPY market_object_colors (id, object_id, colors_id) FROM stdin;
+1	1	1
+2	1	2
+3	2	2
+4	2	3
+5	2	4
+6	3	1
+7	3	4
+\.
+
+
+--
+-- Name: market_object_colors_id_seq; Type: SEQUENCE SET; Schema: public; Owner: django_market
+--
+
+SELECT pg_catalog.setval('market_object_colors_id_seq', 7, true);
+
+
+--
+-- Name: market_object_id_seq; Type: SEQUENCE SET; Schema: public; Owner: django_market
+--
+
+SELECT pg_catalog.setval('market_object_id_seq', 3, true);
+
+
+--
+-- Data for Name: market_objectparam; Type: TABLE DATA; Schema: public; Owner: django_market
+--
+
+COPY market_objectparam (id, value, object_id, param_id) FROM stdin;
+1	Core i5	1	1
+2	2300 МГц	1	2
+3	128...256 Гб	1	3
+4	8 Гб	1	4
+5	13.3 "	1	5
+6	Intel Iris Plus Graphics 640	1	6
+7	1.37 кг	1	7
+8	DVD нет	1	8
+9	нет	1	9
+10	есть	1	10
+11	есть	1	11
+12	Core i3 / Core i5 / Core i7	2	1
+13	2000...2700 МГц	2	2
+14	256...1000 Гб	2	3
+15	4...8 Гб	2	4
+16	15.6 "	2	5
+17	AMD Radeon R7 M440 / AMD Radeon R7 M445 / Intel HD Graphics 620	2	6
+18	2.3 кг	2	7
+19	DVD-RW	2	8
+20	нет	2	9
+21	есть	2	10
+22	есть	2	11
+23	60x33x85 см	3	12
+24	отдельно стоящая стиральная машина	3	13
+25	фронтальная загрузка	3	14
+26	4 кг	3	15
+27	A	3	16
+28	электронное	3	17
+29	при 800 об/мин	3	18
+30	есть	3	19
+\.
+
+
+--
+-- Name: market_objectparam_id_seq; Type: SEQUENCE SET; Schema: public; Owner: django_market
+--
+
+SELECT pg_catalog.setval('market_objectparam_id_seq', 30, true);
+
+
+--
+-- Data for Name: market_param; Type: TABLE DATA; Schema: public; Owner: django_market
+--
+
+COPY market_param (id, title) FROM stdin;
+1	Процессор
+2	Частота процессора
+3	Объем жесткого диска
+4	Объем оперативной памяти
+5	Размер экрана
+6	Видеокарта
+7	Вес
+8	Оптический привод
+9	4G LTE
+10	Bluetooth
+11	Wi-Fi
+12	размер
+13	Тип
+14	Тип загрузки
+15	Загрузка
+16	класс энергопотребления
+17	Управление
+18	Отжим
+19	Защита от протечек
+\.
+
+
+--
+-- Name: market_param_id_seq; Type: SEQUENCE SET; Schema: public; Owner: django_market
+--
+
+SELECT pg_catalog.setval('market_param_id_seq', 19, true);
+
+
+--
+-- Name: auth_group_name_key; Type: CONSTRAINT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY auth_group
+    ADD CONSTRAINT auth_group_name_key UNIQUE (name);
+
+
+--
+-- Name: auth_group_permissions_group_id_0cd325b0_uniq; Type: CONSTRAINT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_0cd325b0_uniq UNIQUE (group_id, permission_id);
+
+
+--
+-- Name: auth_group_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_group_pkey; Type: CONSTRAINT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY auth_group
+    ADD CONSTRAINT auth_group_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_permission_content_type_id_01ab375a_uniq; Type: CONSTRAINT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_01ab375a_uniq UNIQUE (content_type_id, codename);
+
+
+--
+-- Name: auth_permission_pkey; Type: CONSTRAINT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY auth_permission
+    ADD CONSTRAINT auth_permission_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY auth_user_groups
+    ADD CONSTRAINT auth_user_groups_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_groups_user_id_94350c0c_uniq; Type: CONSTRAINT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY auth_user_groups
+    ADD CONSTRAINT auth_user_groups_user_id_94350c0c_uniq UNIQUE (user_id, group_id);
+
+
+--
+-- Name: auth_user_pkey; Type: CONSTRAINT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY auth_user
+    ADD CONSTRAINT auth_user_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_user_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_user_permissions_user_id_14a6b632_uniq; Type: CONSTRAINT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_user_id_14a6b632_uniq UNIQUE (user_id, permission_id);
+
+
+--
+-- Name: auth_user_username_key; Type: CONSTRAINT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY auth_user
+    ADD CONSTRAINT auth_user_username_key UNIQUE (username);
+
+
+--
+-- Name: django_admin_log_pkey; Type: CONSTRAINT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY django_admin_log
+    ADD CONSTRAINT django_admin_log_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_content_type_app_label_76bd3d3b_uniq; Type: CONSTRAINT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY django_content_type
+    ADD CONSTRAINT django_content_type_app_label_76bd3d3b_uniq UNIQUE (app_label, model);
+
+
+--
+-- Name: django_content_type_pkey; Type: CONSTRAINT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY django_content_type
+    ADD CONSTRAINT django_content_type_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY django_migrations
+    ADD CONSTRAINT django_migrations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_session_pkey; Type: CONSTRAINT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY django_session
+    ADD CONSTRAINT django_session_pkey PRIMARY KEY (session_key);
+
+
+--
+-- Name: market_category_pkey; Type: CONSTRAINT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY market_category
+    ADD CONSTRAINT market_category_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: market_category_title_key; Type: CONSTRAINT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY market_category
+    ADD CONSTRAINT market_category_title_key UNIQUE (title);
+
+
+--
+-- Name: market_colors_html_code_key; Type: CONSTRAINT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY market_colors
+    ADD CONSTRAINT market_colors_html_code_key UNIQUE (html_code);
+
+
+--
+-- Name: market_colors_pkey; Type: CONSTRAINT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY market_colors
+    ADD CONSTRAINT market_colors_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: market_colors_title_key; Type: CONSTRAINT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY market_colors
+    ADD CONSTRAINT market_colors_title_key UNIQUE (title);
+
+
+--
+-- Name: market_image_pkey; Type: CONSTRAINT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY market_image
+    ADD CONSTRAINT market_image_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: market_object_colors_object_id_371e0d5d_uniq; Type: CONSTRAINT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY market_object_colors
+    ADD CONSTRAINT market_object_colors_object_id_371e0d5d_uniq UNIQUE (object_id, colors_id);
+
+
+--
+-- Name: market_object_colors_pkey; Type: CONSTRAINT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY market_object_colors
+    ADD CONSTRAINT market_object_colors_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: market_object_pkey; Type: CONSTRAINT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY market_object
+    ADD CONSTRAINT market_object_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: market_object_title_key; Type: CONSTRAINT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY market_object
+    ADD CONSTRAINT market_object_title_key UNIQUE (title);
+
+
+--
+-- Name: market_objectparam_pkey; Type: CONSTRAINT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY market_objectparam
+    ADD CONSTRAINT market_objectparam_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: market_param_pkey; Type: CONSTRAINT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY market_param
+    ADD CONSTRAINT market_param_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: market_param_title_key; Type: CONSTRAINT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY market_param
+    ADD CONSTRAINT market_param_title_key UNIQUE (title);
+
+
+--
+-- Name: auth_group_name_a6ea08ec_like; Type: INDEX; Schema: public; Owner: django_market
+--
+
+CREATE INDEX auth_group_name_a6ea08ec_like ON auth_group USING btree (name varchar_pattern_ops);
+
+
+--
+-- Name: auth_group_permissions_0e939a4f; Type: INDEX; Schema: public; Owner: django_market
+--
+
+CREATE INDEX auth_group_permissions_0e939a4f ON auth_group_permissions USING btree (group_id);
+
+
+--
+-- Name: auth_group_permissions_8373b171; Type: INDEX; Schema: public; Owner: django_market
+--
+
+CREATE INDEX auth_group_permissions_8373b171 ON auth_group_permissions USING btree (permission_id);
+
+
+--
+-- Name: auth_permission_417f1b1c; Type: INDEX; Schema: public; Owner: django_market
+--
+
+CREATE INDEX auth_permission_417f1b1c ON auth_permission USING btree (content_type_id);
+
+
+--
+-- Name: auth_user_groups_0e939a4f; Type: INDEX; Schema: public; Owner: django_market
+--
+
+CREATE INDEX auth_user_groups_0e939a4f ON auth_user_groups USING btree (group_id);
+
+
+--
+-- Name: auth_user_groups_e8701ad4; Type: INDEX; Schema: public; Owner: django_market
+--
+
+CREATE INDEX auth_user_groups_e8701ad4 ON auth_user_groups USING btree (user_id);
+
+
+--
+-- Name: auth_user_user_permissions_8373b171; Type: INDEX; Schema: public; Owner: django_market
+--
+
+CREATE INDEX auth_user_user_permissions_8373b171 ON auth_user_user_permissions USING btree (permission_id);
+
+
+--
+-- Name: auth_user_user_permissions_e8701ad4; Type: INDEX; Schema: public; Owner: django_market
+--
+
+CREATE INDEX auth_user_user_permissions_e8701ad4 ON auth_user_user_permissions USING btree (user_id);
+
+
+--
+-- Name: auth_user_username_6821ab7c_like; Type: INDEX; Schema: public; Owner: django_market
+--
+
+CREATE INDEX auth_user_username_6821ab7c_like ON auth_user USING btree (username varchar_pattern_ops);
+
+
+--
+-- Name: django_admin_log_417f1b1c; Type: INDEX; Schema: public; Owner: django_market
+--
+
+CREATE INDEX django_admin_log_417f1b1c ON django_admin_log USING btree (content_type_id);
+
+
+--
+-- Name: django_admin_log_e8701ad4; Type: INDEX; Schema: public; Owner: django_market
+--
+
+CREATE INDEX django_admin_log_e8701ad4 ON django_admin_log USING btree (user_id);
+
+
+--
+-- Name: django_session_de54fa62; Type: INDEX; Schema: public; Owner: django_market
+--
+
+CREATE INDEX django_session_de54fa62 ON django_session USING btree (expire_date);
+
+
+--
+-- Name: django_session_session_key_c0390e0f_like; Type: INDEX; Schema: public; Owner: django_market
+--
+
+CREATE INDEX django_session_session_key_c0390e0f_like ON django_session USING btree (session_key varchar_pattern_ops);
+
+
+--
+-- Name: market_category_title_ef39b2b5_like; Type: INDEX; Schema: public; Owner: django_market
+--
+
+CREATE INDEX market_category_title_ef39b2b5_like ON market_category USING btree (title varchar_pattern_ops);
+
+
+--
+-- Name: market_colors_html_code_2850dabd_like; Type: INDEX; Schema: public; Owner: django_market
+--
+
+CREATE INDEX market_colors_html_code_2850dabd_like ON market_colors USING btree (html_code varchar_pattern_ops);
+
+
+--
+-- Name: market_colors_title_1901bb03_like; Type: INDEX; Schema: public; Owner: django_market
+--
+
+CREATE INDEX market_colors_title_1901bb03_like ON market_colors USING btree (title varchar_pattern_ops);
+
+
+--
+-- Name: market_image_af31437c; Type: INDEX; Schema: public; Owner: django_market
+--
+
+CREATE INDEX market_image_af31437c ON market_image USING btree (object_id);
+
+
+--
+-- Name: market_object_b583a629; Type: INDEX; Schema: public; Owner: django_market
+--
+
+CREATE INDEX market_object_b583a629 ON market_object USING btree (category_id);
+
+
+--
+-- Name: market_object_colors_82426f06; Type: INDEX; Schema: public; Owner: django_market
+--
+
+CREATE INDEX market_object_colors_82426f06 ON market_object_colors USING btree (colors_id);
+
+
+--
+-- Name: market_object_colors_af31437c; Type: INDEX; Schema: public; Owner: django_market
+--
+
+CREATE INDEX market_object_colors_af31437c ON market_object_colors USING btree (object_id);
+
+
+--
+-- Name: market_object_title_e0ef8546_like; Type: INDEX; Schema: public; Owner: django_market
+--
+
+CREATE INDEX market_object_title_e0ef8546_like ON market_object USING btree (title varchar_pattern_ops);
+
+
+--
+-- Name: market_objectparam_6d7ed919; Type: INDEX; Schema: public; Owner: django_market
+--
+
+CREATE INDEX market_objectparam_6d7ed919 ON market_objectparam USING btree (param_id);
+
+
+--
+-- Name: market_objectparam_af31437c; Type: INDEX; Schema: public; Owner: django_market
+--
+
+CREATE INDEX market_objectparam_af31437c ON market_objectparam USING btree (object_id);
+
+
+--
+-- Name: market_param_title_4e283ab9_like; Type: INDEX; Schema: public; Owner: django_market
+--
+
+CREATE INDEX market_param_title_4e283ab9_like ON market_param USING btree (title varchar_pattern_ops);
+
+
+--
+-- Name: auth_group_permiss_permission_id_84c5c92e_fk_auth_permission_id; Type: FK CONSTRAINT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT auth_group_permiss_permission_id_84c5c92e_fk_auth_permission_id FOREIGN KEY (permission_id) REFERENCES auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_group_permissions_group_id_b120cbf9_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_b120cbf9_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_permiss_content_type_id_2f476e4b_fk_django_content_type_id; Type: FK CONSTRAINT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY auth_permission
+    ADD CONSTRAINT auth_permiss_content_type_id_2f476e4b_fk_django_content_type_id FOREIGN KEY (content_type_id) REFERENCES django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_groups_group_id_97559544_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY auth_user_groups
+    ADD CONSTRAINT auth_user_groups_group_id_97559544_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_groups_user_id_6a12ed8b_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY auth_user_groups
+    ADD CONSTRAINT auth_user_groups_user_id_6a12ed8b_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_user_per_permission_id_1fbb5f2c_fk_auth_permission_id; Type: FK CONSTRAINT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_per_permission_id_1fbb5f2c_fk_auth_permission_id FOREIGN KEY (permission_id) REFERENCES auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_admin_content_type_id_c4bce8eb_fk_django_content_type_id; Type: FK CONSTRAINT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY django_admin_log
+    ADD CONSTRAINT django_admin_content_type_id_c4bce8eb_fk_django_content_type_id FOREIGN KEY (content_type_id) REFERENCES django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_admin_log_user_id_c564eba6_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY django_admin_log
+    ADD CONSTRAINT django_admin_log_user_id_c564eba6_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: market_image_object_id_48df3a49_fk_market_object_id; Type: FK CONSTRAINT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY market_image
+    ADD CONSTRAINT market_image_object_id_48df3a49_fk_market_object_id FOREIGN KEY (object_id) REFERENCES market_object(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: market_object_category_id_0bd3130c_fk_market_category_id; Type: FK CONSTRAINT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY market_object
+    ADD CONSTRAINT market_object_category_id_0bd3130c_fk_market_category_id FOREIGN KEY (category_id) REFERENCES market_category(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: market_object_colors_colors_id_23e450ba_fk_market_colors_id; Type: FK CONSTRAINT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY market_object_colors
+    ADD CONSTRAINT market_object_colors_colors_id_23e450ba_fk_market_colors_id FOREIGN KEY (colors_id) REFERENCES market_colors(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: market_object_colors_object_id_698debc5_fk_market_object_id; Type: FK CONSTRAINT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY market_object_colors
+    ADD CONSTRAINT market_object_colors_object_id_698debc5_fk_market_object_id FOREIGN KEY (object_id) REFERENCES market_object(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: market_objectparam_object_id_6c0d01cc_fk_market_object_id; Type: FK CONSTRAINT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY market_objectparam
+    ADD CONSTRAINT market_objectparam_object_id_6c0d01cc_fk_market_object_id FOREIGN KEY (object_id) REFERENCES market_object(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: market_objectparam_param_id_557593e2_fk_market_param_id; Type: FK CONSTRAINT; Schema: public; Owner: django_market
+--
+
+ALTER TABLE ONLY market_objectparam
+    ADD CONSTRAINT market_objectparam_param_id_557593e2_fk_market_param_id FOREIGN KEY (param_id) REFERENCES market_param(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
