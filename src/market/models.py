@@ -7,6 +7,7 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from unidecode import unidecode
 
+
 # Create your models here.
 
 def image_upload_to(self, filename):
@@ -21,6 +22,7 @@ def image_upload_to(self, filename):
     basename, file_extension = filename.split('.')
     new_filename = '{}images/{}.{}'.format(settings.MEDIA_URL, slug, file_extension)
     return new_filename
+
 
 class Colors(models.Model):
     title = models.CharField(max_length=40, null=False, blank=False, unique=True)
@@ -56,6 +58,7 @@ class Param(models.Model):
     def __str__(self):
         return self.title
 
+
 class ObjectParam(models.Model):
     param = models.ForeignKey(Param)
     object = models.ForeignKey(Object)
@@ -65,8 +68,7 @@ class ObjectParam(models.Model):
         ordering = ['id']
 
     def __str__(self):
-        return '{}/{}'.format(self.object.title,self.value)
-
+        return '{}/{}'.format(self.object.title, self.value)
 
 
 class Image(models.Model):
